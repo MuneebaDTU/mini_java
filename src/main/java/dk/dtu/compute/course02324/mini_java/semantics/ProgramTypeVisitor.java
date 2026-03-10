@@ -80,8 +80,6 @@ public class ProgramTypeVisitor extends ProgramVisitor {
                 checking that the expression is of type integer. If not,
                 the code must add a problem to the problem list.
          */
-
-        whileLoop.statement.accept(this);
     }
 
     @Override

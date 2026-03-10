@@ -98,7 +98,6 @@ public class ProgramExecutorVisitor extends ProgramVisitor {
 
     @Override
     public void visit(WhileLoop whileLoop) {
-        whileLoop.expression.accept(this);
 
         /* TODO Assignment 5b: Here some code which actually executes the
                 while loop must be added. This code should get the current value
@@ -113,7 +112,14 @@ public class ProgramExecutorVisitor extends ProgramVisitor {
                 and the values of these "components" can then be obtained by
                 looking them up in the values Map.
          */
+        Number result = values.get(whileLoop.expression);
 
+        while (result.intValue() >= 0) {
+            whileLoop.statement.accept(this);
+
+            whileLoop.expression.accept(this);
+            result = values.get(whileLoop.expression);
+        }
     }
 
     @Override
