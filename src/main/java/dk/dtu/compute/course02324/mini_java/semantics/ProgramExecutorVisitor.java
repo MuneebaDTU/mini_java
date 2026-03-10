@@ -112,6 +112,7 @@ public class ProgramExecutorVisitor extends ProgramVisitor {
                 and the values of these "components" can then be obtained by
                 looking them up in the values Map.
          */
+        whileLoop.expression.accept(this);
         Number result = values.get(whileLoop.expression);
 
         while (result.intValue() >= 0) {
