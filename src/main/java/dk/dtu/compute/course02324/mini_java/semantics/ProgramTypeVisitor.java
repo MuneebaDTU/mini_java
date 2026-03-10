@@ -21,9 +21,13 @@ public class ProgramTypeVisitor extends ProgramVisitor {
      *      operators make sense.
      */
     final private Map<Operator,List<Type>> operatorTypes = Map.ofEntries(
+            entry(PLUS1, List.of(INT, FLOAT)),
             entry(PLUS2, List.of(INT, FLOAT)),
+            entry(MINUS1, List.of(INT, FLOAT)),
             entry(MINUS2, List.of(INT, FLOAT)),
-            entry(MULT, List.of(INT, FLOAT)));
+            entry(MULT, List.of(INT, FLOAT)),
+            entry(DIV, List.of(INT, FLOAT)),
+            entry(MOD, List.of(INT)));
 
     final public Map<Expression, Type> typeMapping = new HashMap<>();
 
@@ -80,6 +84,10 @@ public class ProgramTypeVisitor extends ProgramVisitor {
                 checking that the expression is of type integer. If not,
                 the code must add a problem to the problem list.
          */
+        Type expressionType = typeMapping.get(whileLoop.expression);
+        if (expressionType == null || !expressionType.equals(INT)) {
+            problems.add("While loop expression must be of type int.");
+        }
 
         whileLoop.statement.accept(this);
     }
