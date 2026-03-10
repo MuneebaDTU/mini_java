@@ -19,87 +19,87 @@ public class ProgramExecutorVisitor extends ProgramVisitor {
 
     final public Map<Expression, Number> values = new HashMap<>();
 
-    private Function<List<Number>, Number> plus1int =
+    private final Function<List<Number>, Number> plus1int =
             args -> {
-                int arg = args.get(0).intValue();
+                int arg = args.getFirst().intValue();
                 return +arg;
             };
 
-    private Function<List<Number>, Number> plus1float =
+    private final Function<List<Number>, Number> plus1float =
             args -> {
-                float arg = args.get(0).floatValue();
+                float arg = args.getFirst().floatValue();
                 return +arg;
             };
 
-    private Function<List<Number>, Number> plus2int =
+    private final Function<List<Number>, Number> plus2int =
             args -> {
                 int arg1 = args.get(0).intValue();
                 int arg2 = args.get(1).intValue();
                 return arg1 + arg2;
             };
 
-    private Function<List<Number>, Number> plus2float =
+    private final Function<List<Number>, Number> plus2float =
             args -> {
                 float arg1 = args.get(0).floatValue();
                 float arg2 = args.get(1).floatValue();
                 return arg1 + arg2;
             };
 
-    private Function<List<Number>, Number> minus1int =
+    private final Function<List<Number>, Number> minus1int =
             args -> {
-                int arg = args.get(0).intValue();
+                int arg = args.getFirst().intValue();
                 return -arg;
             };
 
-    private Function<List<Number>, Number> minus1float =
+    private final Function<List<Number>, Number> minus1float =
             args -> {
-                float arg = args.get(0).floatValue();
+                float arg = args.getFirst().floatValue();
                 return -arg;
             };
 
-    private Function<List<Number>, Number> minus2int =
+    private final Function<List<Number>, Number> minus2int =
             args -> {
                 int arg1 = args.get(0).intValue();
                 int arg2 = args.get(1).intValue();
                 return arg1 - arg2;
             };
 
-    private Function<List<Number>, Number> minus2float =
+    private final Function<List<Number>, Number> minus2float =
             args -> {
                 float arg1 = args.get(0).floatValue();
                 float arg2 = args.get(1).floatValue();
                 return arg1 - arg2;
             };
 
-    private Function<List<Number>, Number> multint =
+    private final Function<List<Number>, Number> multint =
             args -> {
                 int arg1 = args.get(0).intValue();
                 int arg2 = args.get(1).intValue();
                 return arg1 * arg2;
             };
 
-    private Function<List<Number>, Number> multfloat =
+    private final Function<List<Number>, Number> multfloat =
             args -> {
                 float arg1 = args.get(0).floatValue();
                 float arg2 = args.get(1).floatValue();
                 return arg1 * arg2;
             };
 
-    private Function<List<Number>, Number> divint =
+    private final Function<List<Number>, Number> divint =
             args -> {
                 int arg1 = args.get(0).intValue();
                 int arg2 = args.get(1).intValue();
                 return arg1 / arg2;
             };
 
-    private Function<List<Number>, Number> divfloat =
+    private final Function<List<Number>, Number> divfloat =
             args -> {
                 float arg1 = args.get(0).floatValue();
                 float arg2 = args.get(1).floatValue();
                 return arg1 / arg2;
             };
 
-    private Function<List<Number>, Number> modint =
+    private final Function<List<Number>, Number> modint =
             args -> {
                 int arg1 = args.get(0).intValue();
                 int arg2 = args.get(1).intValue();
