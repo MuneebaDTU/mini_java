@@ -20,10 +20,15 @@ public class ProgramTypeVisitor extends ProgramVisitor {
      *      be complete for all (primitive) types of Mini Java on which these
      *      operators make sense.
      */
-    final private Map<Operator,List<Type>> operatorTypes = Map.ofEntries(
+    final private Map<Operator, List<Type>> operatorTypes = Map.ofEntries(
+            entry(PLUS1, List.of(INT, FLOAT)),
             entry(PLUS2, List.of(INT, FLOAT)),
+            entry(MINUS1, List.of(INT, FLOAT)),
             entry(MINUS2, List.of(INT, FLOAT)),
-            entry(MULT, List.of(INT, FLOAT)));
+            entry(MULT, List.of(INT, FLOAT)),
+            entry(DIV, List.of(INT, FLOAT)),
+            entry(MOD, List.of(INT, FLOAT))
+    );
 
     final public Map<Expression, Type> typeMapping = new HashMap<>();
 
@@ -55,7 +60,9 @@ public class ProgramTypeVisitor extends ProgramVisitor {
             typeMapping.put(variable, declaration.type);
             if (declaration.expression != null) {
                 Type expressionType = typeMapping.get(declaration.expression);
-                if (!declaration.type.equals(expressionType)) {
+                if (expressionType == null) {
+                    problems.add("Expression for declaration of " + declaration.variable.name + " has no type.");
+                } else if (!declaration.type.equals(expressionType)) {
                     problems.add("Type mismatch for declaration of " +
                             declaration.type.getName() + " " + declaration.variable.name +
                             ": expression is type " + expressionType.getName() + ".");
@@ -73,15 +80,17 @@ public class ProgramTypeVisitor extends ProgramVisitor {
         // (which the above accept actually does).
     }
 
+    @Override
     public void visit(WhileLoop whileLoop) {
         whileLoop.expression.accept(this);
+        whileLoop.statement.accept(this);
 
         /* TODO Assignment 5b: Here some code most be implemented for
                 checking that the expression is of type integer. If not,
                 the code must add a problem to the problem list.
          */
         Type expressionType = typeMapping.get(whileLoop.expression);
-        if (expressionType == null || !expressionType.equals(INT)){
+        if (expressionType == null || !expressionType.equals(INT)) {
             problems.add("While loop expression must be of type int.");
         }
     }
@@ -114,10 +123,14 @@ public class ProgramTypeVisitor extends ProgramVisitor {
     @Override
     public void visit(Var var) {
         if (!variables.contains(var)) {
-            problems.add("Variable not defined " + var);
-        } else if (typeMapping.get(var) == null) {
-            // this should actually not happen
-            problems.add("Variable " + var.name + " does not have a type.");
+            problems.add("Variable not defined " + var.name);
+        } else {
+            Type type = typeMapping.get(var);
+            if (type == null) {
+                problems.add("Variable " + var.name + " does not have a type.");
+            } else {
+                typeMapping.put(var, type);
+            }
         }
     }
 
