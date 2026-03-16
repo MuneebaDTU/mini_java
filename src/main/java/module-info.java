@@ -6,7 +6,7 @@
 module dk.dtu.compute.course02324.mini_java {
 
     requires org.jetbrains.annotations;
-    requires javafx.controls;
+
 
     exports dk.dtu.compute.course02324.mini_java;
     exports dk.dtu.compute.course02324.mini_java.model;
