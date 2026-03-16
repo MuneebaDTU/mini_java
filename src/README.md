@@ -61,8 +61,13 @@ Execution
 
 # Part 5c – Tests and Coverage
 
-Additional tests were added in a new file "ProgramVisitorTest":
+The provided test suite was extended with additional tests to increase code coverage.
 
+Additional tests were implemented in a new file "ProgramVisitorTest" to verify:
+•	Correct operator behavior
+•	Correct execution of print statements
+•	While loop execution
+•	Error detection for incorrect programs
 
 The tests cover:
 `
@@ -80,6 +85,10 @@ The tests cover:
 An additional loop test provided by the instructors (test2LoopProgram) was added 
 to ensure that while loop execution behaves correctly.
 
+All tests pass successfully using:
+mvn clean test
+'Running' tests
+
 
 # Coverage Results
 
@@ -89,4 +98,38 @@ Class	Line Coverage
 ProgramExecutorVisitor	97%
 ProgramTypeVisitor	91%
 
-Both exceed the required 90% coverage for Assignment 5.
+
+# Running the Project
+
+To build and test the project:
+
+mvn clean test
+
+To run the Mini Java example program:
+
+Run the MiniJavaRun class inside IntelliJ.
+
+The output will be printed in the IntelliJ console.
+
+# Project Structure
+
+mini_java
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   └── test
+│       └── java
+└── README.md
+
+
+# Extras
+
+No additional functionality beyond the assignment requirements was implemented.
+
+# Author
+
+Group : 9
+Course: 02324 – Advanced Programming
+Assignment: Mini Java Interpreter – Assignment 5
+
